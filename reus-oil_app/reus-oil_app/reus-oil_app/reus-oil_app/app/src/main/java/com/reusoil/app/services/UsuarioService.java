@@ -28,7 +28,6 @@ public class UsuarioService {
         if (usuarioExistente.isPresent()) {
             Usuario usuario = usuarioExistente.get();
             usuario.setUsuario(usuarioActualizado.getUsuario());
-            usuario.setCorreo(usuarioActualizado.getCorreo());
             usuario.setClave(usuarioActualizado.getClave());
             return usuario;
         }
@@ -45,8 +44,8 @@ public class UsuarioService {
 
     @PostConstruct
     public void init() {
-        usuarios.add(new Usuario(1L, "admin", "admin@correo.com", "1234"));
-        usuarios.add(new Usuario(2L, "empresa", "empresa@corporativo.algo.com", "abcd"));
+        usuarios.add(new Usuario(1L, "admin", "1234"));
+        usuarios.add(new Usuario(2L, "empresa", "abcd"));
     }
 
 }
