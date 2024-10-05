@@ -16,7 +16,7 @@ public class LoginController {
     public String mostrarFormularioLogin() {
         return "vistas/login"; // Nombre de la vista de login
     }
-
+    
     // PostMapping que reciba la contraseña y redirija a la vista homepage.html
     @PostMapping("/login")
     public String iniciarSesion(@RequestParam("usuarioLogin") String usuario,
@@ -26,12 +26,10 @@ public class LoginController {
             model.addAttribute("error", "Todos los campos son obligatorios.");
             return "vistas/login";
         }
-    
         if (!usuario.equals(usuarioValido) || !clave.equals(claveValida)) {
             model.addAttribute("error", "Usuario o contraseña incorrectos.");
             return "vistas/login";
         }
-    
         return "vistas/homepage";
     }
     

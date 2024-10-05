@@ -1,20 +1,29 @@
 package com.reusoil.app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
-import com.reusoil.app.models.Usuario;
-import com.reusoil.app.services.UsuarioService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
+import com.reusoil.app.models.Usuario;
+import com.reusoil.app.services.UsuarioServiceIface;
+import com.reusoil.app.services.UsuarioServiceSQL;
+
+@Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioServiceSQL usuarioService;
+
+    public UsuarioController(UsuarioServiceSQL usuarioService){
+        this.usuarioService = usuarioService;
+    }
 
     @PostMapping("/registrar")
     public Usuario registrarUsuario(@RequestBody Usuario usuario) {
