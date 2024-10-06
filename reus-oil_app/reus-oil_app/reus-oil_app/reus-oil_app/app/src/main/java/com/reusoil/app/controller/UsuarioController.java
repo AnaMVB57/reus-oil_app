@@ -1,19 +1,12 @@
 package com.reusoil.app.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.reusoil.app.models.Usuario;
-import com.reusoil.app.services.UsuarioServiceIface;
+import com.reusoil.app.models.UsuarioApi;
 import com.reusoil.app.services.UsuarioServiceSQL;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -26,13 +19,18 @@ public class UsuarioController {
     }
 
     @PostMapping("/registrar")
-    public Usuario registrarUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.registrarUsuario(usuario);
+    public Usuario registrarUsuario(@ModelAttribute UsuarioApi usuario) {
+        return usuarioService.registrarUsuario(
+                Usuario.builder()
+                        .usuario(usuario.getUsuario())
+                        .clave(usuario.getClave())
+                        .build()
+        );
     }
 
     @GetMapping("/{id}")
-    public Optional<Usuario> obtenerUsuario(@PathVariable Long id) {
-        return usuarioService.obtenerUsuarioPorId(id);
+    public Usuario obtenerUsuario(@PathVariable Long id) {
+        return usuarioService.obtenerUsuarioPorId(id).orElse(null);
     }
 
     @PutMapping("/actualizar")

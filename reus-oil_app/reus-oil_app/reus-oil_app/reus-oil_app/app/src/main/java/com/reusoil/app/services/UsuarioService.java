@@ -44,8 +44,8 @@ public class UsuarioService {
 
     @PostConstruct
     public void init() {
-        usuarios.add(new Usuario(1L, "admin", "1234"));
-        usuarios.add(new Usuario(2L, "empresa", "abcd"));
+        usuarios.add(new Usuario(1L, "admin", List.of(), "1234"));
+        usuarios.add(new Usuario(2L, "empresa", List.of(), "abcd"));
     }
 
 }

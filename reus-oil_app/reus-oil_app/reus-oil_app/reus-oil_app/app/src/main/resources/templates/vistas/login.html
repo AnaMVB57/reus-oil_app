@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -15,22 +15,23 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form>
+            <form th:action="@{/usuarios/registrar}" th:object="${usuario}" method="post" id="register-form" onsubmit="return true">
                 <h1>Regístrate</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
                 <span>o usa tu correo para registrarte</span>
-                <input id="usuarioRegistro" type="text" placeholder="Usuario">
+                <input id="usuarioRegistro" th:field="*{usuario}" type="text" placeholder="Usuario">
                 <!-- <input id="correo" type="email" placeholder="Correo"> -->
-                <input id="claveRegistro" type="password" placeholder="Contraseña">
-                <button>Registrarse</button>
+                <input id="claveRegistro" th:field="*{clave}" type="password" placeholder="Contraseña">
+                <small class="form-text" id="msgErrorRegistro"></small>
+                <button type="submit">Registrarse</button>
             </form>
         </div>
         <div class="form-container sign-in">
             <!-- onsubmit="return validar()" -->
-            <form action="/login" method="post" id="login-form" onsubmit="return validar()">
+            <form action="/login" method="post" id="login-form" onsubmit="return validar('#msgError')">
                 <h1>Ingreso</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>

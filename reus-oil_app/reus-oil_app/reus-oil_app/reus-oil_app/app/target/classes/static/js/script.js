@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-function validar() {
+function validar(msgErrorEtiquetaId) {
     let validado = true;
     let usuarioV = "usuario123";
     let claveV = "clave123";
@@ -29,14 +28,17 @@ function validar() {
     let usuario = document.getElementById("usuarioLogin"); 
     let clave = document.getElementById("claveLogin");
 
-    let msgError = document.querySelector("#msgError");
+    if(!validarVacio(usuario, "Usuario no puede estar vacio", msgErrorEtiquetaId)) { return false; }
+    if(!validarVacio(clave, "Clave no puede estar vacia", msgErrorEtiquetaId)) { return false; }
+
+    let msgError = document.querySelector(msgErrorEtiquetaId);
 
     if (usuario.value == '' && clave.value == '') {
         msgError.innerHTML += "Ingrese sus credenciales. <br/>";
         validado = false;
     }
 
-    else if (usuario.value !== usuarioV) {
+    /*else if (usuario.value !== usuarioV) {
         msgError.innerHTML += "Usuario incorrecto. <br/>";
         validado = false;
     }
@@ -44,7 +46,18 @@ function validar() {
     else if (clave.value !== claveV) {
         msgError.innerHTML += "Contraseña incorrecta. <br/>";
         validado = false;
-    }
+    }*/
     
     return validado;
+}
+
+function validarVacio(valor, mensajeError, etiquetaId) {
+    let msgError = document.querySelector(etiquetaId);
+
+    if(valor.value === '') {
+        msgError.innerHTML += mensajeError;
+        return false;
+    }
+
+    return true;
 }

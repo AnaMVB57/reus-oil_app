@@ -1,5 +1,8 @@
 package com.reusoil.app.controller;
 
+import com.reusoil.app.models.UsuarioApi;
+import com.reusoil.app.services.UsuarioServiceIface;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,13 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequiredArgsConstructor
 public class LoginController {
 
-    private final String usuarioValido = "usuario123";
-    private final String claveValida = "clave123";
+    private final UsuarioServiceIface usuarioService;
 
     @GetMapping("/login")
-    public String mostrarFormularioLogin() {
+    public String mostrarFormularioLogin(Model model) {
+        model.addAttribute("usuario", new UsuarioApi());
         return "vistas/login"; // Nombre de la vista de login
     }
     
@@ -22,15 +26,31 @@ public class LoginController {
     public String iniciarSesion(@RequestParam("usuarioLogin") String usuario,
                                 @RequestParam("claveLogin") String clave,
                                 Model model) {
+        var usuarioActual = usuarioService.obtenerUsuarioPorUsuario(usuario);
+
         if (usuario.isEmpty() || clave.isEmpty()) {
             model.addAttribute("error", "Todos los campos son obligatorios.");
             return "vistas/login";
         }
-        if (!usuario.equals(usuarioValido) || !clave.equals(claveValida)) {
+
+        if(usuarioActual == null) {
+            model.addAttribute("error", "Usuario no existe");
+             return "vistas/login";
+        }
+
+        if (!usuario.equals(usuarioActual.getUsuario()) || !clave.equals(usuarioActual.getClave())) {
             model.addAttribute("error", "Usuario o contraseña incorrectos.");
             return "vistas/login";
         }
         return "vistas/homepage";
+    }
+
+    @PostMapping("/register")
+    public String registrar(@RequestParam("usuarioLogin") String usuario,
+                           @RequestParam("claveLogin") String clave,
+                           Model model) {
+        System.out.println("Registrar!!");
+        return "";
     }
     
     @PostMapping("/home")
