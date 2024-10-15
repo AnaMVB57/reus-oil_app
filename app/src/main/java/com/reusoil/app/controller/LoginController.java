@@ -18,7 +18,7 @@ public class LoginController {
 
     @GetMapping("/mostrar-login")
     public String mostrarFormularioLogin(Model model) {
-        model.addAttribute("usuario", new UsuarioAPI());
+        model.addAttribute("usuarioEntity", new UsuarioAPI());
         return "vistas/login"; // Nombre de la vista de login
     }
     
