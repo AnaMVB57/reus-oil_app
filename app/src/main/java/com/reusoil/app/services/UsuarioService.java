@@ -5,31 +5,31 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
-import com.reusoil.app.models.Usuario;
+import com.reusoil.app.models.usuario.UsuarioEntity;
 
 import jakarta.annotation.PostConstruct;
 
 @Service
 public class UsuarioService {
 
-    private List<Usuario> usuarios = new ArrayList<>();
+    private List<UsuarioEntity> usuarioEntities = new ArrayList<>();
 
-    public Usuario registrarUsuario(Usuario usuario) {
-        usuarios.add(usuario);
-        return usuario;
+    public UsuarioEntity registrarUsuario(UsuarioEntity usuarioEntity) {
+        usuarioEntities.add(usuarioEntity);
+        return usuarioEntity;
     }
 
-    public Optional<Usuario> obtenerUsuarioPorId(Long id) {
-        return usuarios.stream().filter(u -> u.getId().equals(id)).findFirst();
+    public Optional<UsuarioEntity> obtenerUsuarioPorId(Long id) {
+        return usuarioEntities.stream().filter(u -> u.getId().equals(id)).findFirst();
     }
 
-    public Usuario actualizarUsuario(Usuario usuarioActualizado) {
-        Optional<Usuario> usuarioExistente = obtenerUsuarioPorId(usuarioActualizado.getId());
+    public UsuarioEntity actualizarUsuario(UsuarioEntity usuarioEntityActualizado) {
+        Optional<UsuarioEntity> usuarioExistente = obtenerUsuarioPorId(usuarioEntityActualizado.getId());
         if (usuarioExistente.isPresent()) {
-            Usuario usuario = usuarioExistente.get();
-            usuario.setUsuario(usuarioActualizado.getUsuario());
-            usuario.setClave(usuarioActualizado.getClave());
-            return usuario;
+            UsuarioEntity usuarioEntity = usuarioExistente.get();
+            usuarioEntity.setUsuario(usuarioEntityActualizado.getUsuario());
+            usuarioEntity.setClave(usuarioEntityActualizado.getClave());
+            return usuarioEntity;
         }
         return null;
     }
@@ -38,14 +38,14 @@ public class UsuarioService {
     //     usuarios.removeIf(u -> u.getId().equals(id));
     // }
 
-    public List<Usuario> obtenerTodosLosUsuarios() {
-        return usuarios;
+    public List<UsuarioEntity> obtenerTodosLosUsuarios() {
+        return usuarioEntities;
     }
 
-    @PostConstruct
-    public void init() {
-        usuarios.add(new Usuario(1L, "admin", List.of(), "1234"));
-        usuarios.add(new Usuario(2L, "empresa", List.of(), "abcd"));
-    }
+//    @PostConstruct
+//    public void init() {
+//        usuarioEntities.add(new UsuarioEntity(1L, "admin", List.of(), "1234"));
+//        usuarioEntities.add(new UsuarioEntity(2L, "empresa", List.of(), "abcd"));
+//    }
 
 }

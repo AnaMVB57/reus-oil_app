@@ -15,7 +15,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form th:action="@{/usuarios/registrar}" th:object="${usuario}" method="post" id="register-form" onsubmit="return true">
+            <form th:action="@{/usuarios/registrar}" th:object="${usuarioEntity}" method="post" id="register-form" onsubmit="return true">
                 <h1>Regístrate</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>

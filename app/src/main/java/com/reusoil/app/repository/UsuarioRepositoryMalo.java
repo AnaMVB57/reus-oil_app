@@ -5,7 +5,7 @@
 
 // import org.springframework.stereotype.Repository;
 
-// import com.reusoil.app.models.Usuario;
+// import com.reusoil.app.models.usuario.Usuario;
 
 // @Repository
 // public class UsuarioRepository implements UsuarioDAOIface{

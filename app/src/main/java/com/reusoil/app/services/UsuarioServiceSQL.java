@@ -1,6 +1,6 @@
 package com.reusoil.app.services;
 
-import com.reusoil.app.models.Usuario;
+import com.reusoil.app.models.usuario.UsuarioEntity;
 import com.reusoil.app.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ public class UsuarioServiceSQL implements UsuarioServiceIface {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Usuario> obtenerUsuariosTodos(Usuario usuario) {
+    public List<UsuarioEntity> obtenerUsuariosTodos(UsuarioEntity usuarioEntity) {
        return usuarioRepository.findAll();
     }
 
@@ -32,38 +32,38 @@ public class UsuarioServiceSQL implements UsuarioServiceIface {
 
     @Override
     @Transactional
-    public void guardarUsuario(Usuario usuario) {
-        usuarioRepository.save(usuario);
+    public void guardarUsuario(UsuarioEntity usuarioEntity) {
+        usuarioRepository.save(usuarioEntity);
     }
 
     @Override
-    public Usuario obtenerUsuarioPorUsuario(String usuario) {
+    public UsuarioEntity obtenerUsuarioPorUsuario(String usuario) {
         return usuarioRepository.findByUsuario(usuario).orElse(null);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Usuario> obtenerUsuarioPorId(Long id) {
+    public Optional<UsuarioEntity> obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id);
     }
 
-    private List<Usuario> usuarios = new ArrayList<>();
+    private List<UsuarioEntity> usuarioEntities = new ArrayList<>();
 
-    public Usuario registrarUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+    public UsuarioEntity registrarUsuario(UsuarioEntity usuarioEntity) {
+        return usuarioRepository.save(usuarioEntity);
     }
 
     // public Optional<Usuario> obtenerUsuarioPorId(Long id) {
     //     return usuarios.stream().filter(u -> u.getId().equals(id)).findFirst();
     // }
 
-    public Usuario actualizarUsuario(Usuario usuarioActualizado) {
-         Optional<Usuario> usuarioExistente = obtenerUsuarioPorId(usuarioActualizado.getId());
+    public UsuarioEntity actualizarUsuario(UsuarioEntity usuarioEntityActualizado) {
+         Optional<UsuarioEntity> usuarioExistente = obtenerUsuarioPorId(usuarioEntityActualizado.getId());
          if (usuarioExistente.isPresent()) {
-             Usuario usuario = usuarioExistente.get();
-             usuario.setUsuario(usuarioActualizado.getUsuario());
-             usuario.setClave(usuarioActualizado.getClave());
-             return usuario;
+             UsuarioEntity usuarioEntity = usuarioExistente.get();
+             usuarioEntity.setUsuario(usuarioEntityActualizado.getUsuario());
+             usuarioEntity.setClave(usuarioEntityActualizado.getClave());
+             return usuarioEntity;
          }
          return null;
     }
@@ -72,8 +72,8 @@ public class UsuarioServiceSQL implements UsuarioServiceIface {
     //     usuarios.removeIf(u -> u.getId().equals(id));
     // }
 
-    public List<Usuario> obtenerTodosLosUsuarios() {
-         return usuarios;
+    public List<UsuarioEntity> obtenerTodosLosUsuarios() {
+         return usuarioEntities;
     }
 
 

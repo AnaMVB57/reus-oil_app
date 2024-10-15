@@ -1,7 +1,7 @@
 package com.reusoil.app.controller;
 
-import com.reusoil.app.models.Usuario;
-import com.reusoil.app.models.UsuarioApi;
+import com.reusoil.app.models.usuario.UsuarioEntity;
+import com.reusoil.app.models.usuario.UsuarioAPI;
 import com.reusoil.app.services.UsuarioServiceSQL;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +19,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/registrar")
-    public String registrarUsuario(@ModelAttribute UsuarioApi usuario) {
+    public String registrarUsuario(@ModelAttribute UsuarioAPI usuario) {
         usuarioService.registrarUsuario(
-                Usuario.builder()
+                UsuarioEntity.builder()
                         .usuario(usuario.getUsuario())
                         .clave(usuario.getClave())
                         .build()
@@ -30,13 +30,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Usuario obtenerUsuario(@PathVariable Long id) {
+    public UsuarioEntity obtenerUsuario(@PathVariable Long id) {
         return usuarioService.obtenerUsuarioPorId(id).orElse(null);
     }
 
     @PutMapping("/actualizar")
-    public Usuario actualizarUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.actualizarUsuario(usuario);
+    public UsuarioEntity actualizarUsuario(@RequestBody UsuarioEntity usuarioEntity) {
+        return usuarioService.actualizarUsuario(usuarioEntity);
     }
 
     // @DeleteMapping("/eliminar/{id}")
@@ -45,7 +45,7 @@ public class UsuarioController {
     // }
 
     @GetMapping("/todos")
-    public List<Usuario> obtenerTodosLosUsuarios() {
+    public List<UsuarioEntity> obtenerTodosLosUsuarios() {
         return usuarioService.obtenerTodosLosUsuarios();
     }
 }
