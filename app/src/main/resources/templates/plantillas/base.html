@@ -6,7 +6,7 @@
     <title>Plantilla</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
- <!--   <link rel="stylesheet" th:href="@{/css/styles.css}"> -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/style/homepage.css}">
 </head>
 <body>
@@ -18,22 +18,22 @@
             <span>Reus-Oil</span>
         </div>
         <ul class="nav-links">
-            <li><a th:href="#inicio">Inicio</a></li>
+            <li><a href="#">Inicio</a></li>
             <li>
-                <a th:href="/menu">Gestiones</a>
+                <a href="/menu">Gestiones</a>
                 <ul class="dropdown">
-                    <li><a th:href="/gestion/usuario">Gestión Usuario</a></li>
-                    <li><a th:href="/gestion/perfil">Perfil</a></li>
-                    <li><a th:href="/gestion/ciudad">Ciudad</a></li>
-                    <li><a th:href="/gestion/empresa">Empresa</a></li>
-                    <li><a th:href="/gestion/tipo-empresa">Tipo de Empresa</a></li>
-                    <li><a th:href="/gestion/recoleccion">Recolección</a></li>
-                    <li><a th:href="/gestion/contenedor">Contenedor</a></li>
+                    <li><a href="/gestion/usuario">Gestión Usuario</a></li>
+                    <li><a href="/gestion/perfil">Perfil</a></li>
+                    <li><a href="/gestion/ciudad">Ciudad</a></li>
+                    <li><a href="/gestion/empresa">Empresa</a></li>
+                    <li><a href="/gestion/tipo-empresa">Tipo de Empresa</a></li>
+                    <li><a href="/gestion/recoleccion">Recolección</a></li>
+                    <li><a href="/gestion/contenedor">Contenedor</a></li>
                 </ul>
             </li>
-            <li><a th:href="#configuracion">Configuración</a></li>
-            <li><a th:href="#contacto">Contacto</a></li>
-            <li><a th:href="/logout">Cerrar sesión</a></li>
+            <li><a href="#">Configuración</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="/logout">Cerrar sesión</a></li>
         </ul>
     </nav>
 </header>

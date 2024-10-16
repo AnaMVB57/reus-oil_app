@@ -2,7 +2,7 @@ package com.reusoil.app.controller;
 
 import com.reusoil.app.models.usuario.UsuarioEntity;
 import com.reusoil.app.models.usuario.UsuarioAPI;
-import com.reusoil.app.services.UsuarioServiceSQL;
+import com.reusoil.app.services.usuario.UsuarioServiceSQL;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

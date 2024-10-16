@@ -1,8 +1,7 @@
 package com.reusoil.app.controller;
 
 import com.reusoil.app.models.usuario.UsuarioAPI;
-import com.reusoil.app.models.usuario.UsuarioEntity;
-import com.reusoil.app.services.UsuarioServiceIface;
+import com.reusoil.app.services.usuario.UsuarioServiceIface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,7 @@ public class LoginController {
 
     @GetMapping("/mostrar-login")
     public String mostrarFormularioLogin(Model model) {
-        model.addAttribute("usuarioEntity", new UsuarioAPI());
+        model.addAttribute("usuario", new UsuarioAPI());
         return "vistas/login"; // Nombre de la vista de login
     }
     
