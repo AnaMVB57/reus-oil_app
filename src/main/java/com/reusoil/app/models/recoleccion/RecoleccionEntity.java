@@ -5,8 +5,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity(name = "recoleccion")
 @Builder
@@ -22,7 +23,8 @@ public class RecoleccionEntity {
     @NotNull(message = "La fecha de recolección es obligatoria")
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date fechaRecoleccion;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechaRecoleccion;
 
     @NotNull(message = "El volumen recogido es obligatorio")
     @Min(value = 0, message = "El volumen recogido debe ser mayor o igual a 0")
@@ -31,7 +33,7 @@ public class RecoleccionEntity {
 
     @ToString.Exclude
     @NotNull(message = "La empresa es obligatoria")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_empresa", referencedColumnName = "id", nullable = false)
     private EmpresaEntity empresa;
 

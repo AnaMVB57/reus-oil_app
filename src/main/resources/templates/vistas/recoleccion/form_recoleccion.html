@@ -11,6 +11,9 @@
     <h1 class="text-center mb-4" >Gestión Recolección</h1>
 
     <form th:action="@{/recoleccion/guardar}" th:object="${recoleccion}" method="post">
+        <!-- Campo escondido de ID -->
+        <input type="hidden" th:field="*{id}"/>
+
         <!-- Campo de fecha de recolección -->
         <div class="form-group">
             <label for="fechaRecoleccion">Fecha de Recolección:</label>

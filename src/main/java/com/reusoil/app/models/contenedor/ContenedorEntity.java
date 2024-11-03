@@ -1,7 +1,6 @@
 package com.reusoil.app.models.contenedor;
 
 import com.reusoil.app.models.empresa.EmpresaEntity;
-import com.reusoil.app.models.tipo_empresa.TipoEmpresaEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +8,6 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity(name = "contenedor")
 @Builder
@@ -32,7 +30,7 @@ public class ContenedorEntity {
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaInst;
 
     @ToString.Exclude

@@ -43,6 +43,7 @@ public class RecoleccionVistaController {
         if (recoleccion.isPresent()) {
             model.addAttribute("recoleccion", recoleccion.get());
             model.addAttribute("modoEdicion", true); // Indica que se está en modo de edición
+            model.addAttribute("empresas", empresaService.obtenerEmpresasPorEstado(true));
             return "vistas/recoleccion/form_recoleccion"; // Reutiliza el mismo formulario
         }
         return "redirect:/recoleccion/listado-recolecciones"; // Redirige si no se encuentra la recolección

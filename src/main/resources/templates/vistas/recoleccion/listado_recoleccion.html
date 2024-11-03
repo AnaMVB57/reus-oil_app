@@ -24,7 +24,7 @@
         <tbody>
         <tr th:each="recoleccion : ${recolecciones}">
             <td th:text="${recoleccion.id}"></td>
-            <td th:text="${#dates.format(recoleccion.fechaRecoleccion, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#temporals.format(recoleccion.fechaRecoleccion, 'yyyy-MM-dd')}"></td>
             <td th:text="${recoleccion.volumenRecogido}"></td>
             <td th:text="${recoleccion.empresa.nombre}"></td>
             <td th:text="${recoleccion.estado ? 'Activo' : 'Inactivo'}"></td>
