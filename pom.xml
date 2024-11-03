@@ -84,16 +84,8 @@
             <artifactId>spring-context</artifactId>
             <version>6.1.8</version>
         </dependency>
-
-		<!-- H2 dependency -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
     </dependencies>
-
-
+	
 	<build>
 		<plugins>
 			<plugin>
