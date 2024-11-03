@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Homepage</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+</head>
+<body>
+<header th:replace="~{plantillas/base :: base-header}"></header>
+
+<main class="container my-5 text-center" th:fragment="base-content">
+    <div class="main-content">
+        <section id="inicio">
+            <h1>¡Bienvenido a Reus-Oil!</h1>
+            <p>Gestión de aceite usado de forma eficiente y ecológica.</p>
+        </section>
+    </div>
+</main>
+
+<footer th:replace="~{plantillas/base :: base-footer}"></footer>
+</body>
+</html>

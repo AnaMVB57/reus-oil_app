@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{plantillas/base :: base-head}"></head>
+    <title th:text="${modoEdicion ? 'Editar' : 'Registrar'} + ' Contenedor'">Gestión de Contenedores | Reus-Oil</title>
+    <link rel="stylesheet" th:href="@{/css/forms.css}">
+<body>
+
+<header th:replace="~{plantillas/base :: base-header}"></header>
+
+<main class="container my-5" th:fragment="base-content">
+    <div class="form-container">
+        <form th:action="@{/contenedor/guardar}" th:object="${contenedor}" method="post">
+            <h1 th:text="${modoEdicion ? 'Editar' : 'Registrar'} + ' Contenedor'">Registrar Contenedor</h1>
+
+            <div class="mb-3">
+                <label for="id" class="form-label">Identificador</label>
+                <input type="text" th:field="*{id}" id="id" class="form-control" placeholder="Id del contenedor" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="capacidad" class="form-label">Capacidad Máxima (litros)</label>
+                <input type="number" th:field="*{capacidad}" id="capacidad" class="form-control" placeholder="Capacidad máxima en litros" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="ubicacion" class="form-label">Ubicación</label>
+                <input type="text" th:field="*{ubicacion}" id="ubicacion" class="form-control" placeholder="Ubicación del contenedor" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="fechaInst" class="form-label">Fecha de Instalación</label>
+                <input type="date" th:field="*{fechaInst}" id="fechaInst" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="empresa" class="form-label">Empresa</label>
+                <select th:field="*{empresa}">
+                    <option th:each="empresa : ${empresas}"
+                            th:value="${empresa.id}"
+                            th:text="${empresa.nombre}">
+                    </option>
+                </select>
+
+            </div>
+
+            <div class="mb-3 form-check">
+                <input id="estado" type="checkbox" th:field="*{estado}" th:checked="*{estado}" class="form-check-input">
+                <label for="estado" class="form-check-label">Activo</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</main>
+
+<div th:insert="plantillas/base :: base-footer"></div>
+
+</body>
+</html>
