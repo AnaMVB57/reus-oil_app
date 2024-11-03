@@ -1,6 +1,5 @@
 package com.reusoil.app.repository.tipo_empresa;
 
-import com.reusoil.app.models.empresa.EmpresaEntity;
 import com.reusoil.app.models.tipo_empresa.TipoEmpresaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

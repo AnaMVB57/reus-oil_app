@@ -11,9 +11,11 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class EmpresaServiceImpl implements EmpresaService{
+@Transactional
+public class EmpresaServiceImpl implements EmpresaService {
 
-    final private EmpresaRepository empresaRepository;
+    private final EmpresaRepository empresaRepository;
+
     @Override
     @Transactional(readOnly = true)
     public List<EmpresaEntity> obtenerEmpresas() {
@@ -27,13 +29,11 @@ public class EmpresaServiceImpl implements EmpresaService{
     }
 
     @Override
-    @Transactional
     public void guardar(EmpresaEntity empresa) {
         empresaRepository.save(empresa);
     }
 
     @Override
-    @Transactional
     public void eliminarEmpresaPorId(Long id) {
         empresaRepository.deleteById(id);
     }
@@ -48,6 +48,7 @@ public class EmpresaServiceImpl implements EmpresaService{
         return empresaRepository.findByEstado(estado);
     }
 
+    @Override
     public void borradoLogico(Long id) {
         Optional<EmpresaEntity> empresa = empresaRepository.findById(id);
         if (empresa.isPresent()) {

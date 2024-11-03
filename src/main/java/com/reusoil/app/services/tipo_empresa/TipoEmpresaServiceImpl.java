@@ -1,6 +1,5 @@
 package com.reusoil.app.services.tipo_empresa;
 
-import com.reusoil.app.models.empresa.EmpresaEntity;
 import com.reusoil.app.models.tipo_empresa.TipoEmpresaEntity;
 import com.reusoil.app.repository.tipo_empresa.TipoEmpresaRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +11,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class TipoEmpresaServiceImpl implements TipoEmpresaService {
 
     final private TipoEmpresaRepository tipoEmpresaRepository;

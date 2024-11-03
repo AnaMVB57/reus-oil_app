@@ -22,7 +22,7 @@ public class ContenedorEntity {
 
     @Column(nullable = false)
     @NotNull(message = "El campo no puede estar vacío.")
-    private float capacidad;
+    private Float capacidad;
 
     @NotBlank(message = "El campo no puede estar vacío.")
     @Column(nullable = false)

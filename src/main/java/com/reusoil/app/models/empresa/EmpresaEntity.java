@@ -1,17 +1,18 @@
 package com.reusoil.app.models.empresa;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.reusoil.app.models.ciudad.CiudadEntity;
 import com.reusoil.app.models.contenedor.ContenedorEntity;
 import com.reusoil.app.models.persona.PersonaEntity;
 import com.reusoil.app.models.tipo_empresa.TipoEmpresaEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity(name = "empresa")
@@ -47,12 +48,12 @@ public class EmpresaEntity {
     private LocalDate fechaRegistro = LocalDate.now();
 
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_ciudad", referencedColumnName = "id", nullable = false)
     private CiudadEntity ciudad;
 
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_tipo_empresa", referencedColumnName = "id", nullable = false)
     private TipoEmpresaEntity tipoEmpresa;
 
