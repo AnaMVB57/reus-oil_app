@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-@Component
+@Component //Comentar si no se va a usar
 @RequiredArgsConstructor
 public class PersonaFilter implements Filter {
 

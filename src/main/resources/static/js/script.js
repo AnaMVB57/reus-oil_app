@@ -5,12 +5,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const registerBtn = document.getElementById('register');
     const loginBtn = document.getElementById('login');
 
+    // Recupera la selección guardada en localStorage al cargar la página
+    const selectedView = localStorage.getItem('selectedView');
+    if (selectedView === 'register') {
+        container.classList.add("active"); // Muestra la vista de registro
+    } else {
+        container.classList.remove("active"); // Muestra la vista de login (por defecto)
+    }
+
+    // Al hacer clic en el botón de "Registro", guarda la selección en localStorage
     registerBtn.addEventListener('click', () => {
         container.classList.add("active");
+        localStorage.setItem('selectedView', 'register');
     });
 
+    // Al hacer clic en el botón de "Login", guarda la selección en localStorage
     loginBtn.addEventListener('click', () => {
         container.classList.remove("active");
+        localStorage.setItem('selectedView', 'login');
     });
 });
 
