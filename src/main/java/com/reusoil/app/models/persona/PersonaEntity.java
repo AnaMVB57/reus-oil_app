@@ -1,11 +1,9 @@
 package com.reusoil.app.models.persona;
 
 import com.reusoil.app.models.empresa.EmpresaEntity;
-import com.reusoil.app.models.perfil.PerfilEntity;
 import com.reusoil.app.models.usuario.UsuarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 @Entity(name = "persona")
@@ -16,7 +14,7 @@ import lombok.*;
 public class PersonaEntity {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "El nombre no puede estar en blanco.")
@@ -36,7 +34,7 @@ public class PersonaEntity {
 
     @ToString.Exclude
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private UsuarioEntity usuario;
 
     private boolean estado;
