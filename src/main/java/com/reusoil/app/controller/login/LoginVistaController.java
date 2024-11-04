@@ -1,6 +1,6 @@
 package com.reusoil.app.controller.login;
 
-import com.reusoil.app.models.usuario.UsuarioAPI;
+import com.reusoil.app.models.registro.RegistroDTO;
 import com.reusoil.app.services.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ public class LoginVistaController {
 
     @GetMapping("/mostrar-login")
     public String mostrarFormularioLogin(Model model) {
-        model.addAttribute("usuario", new UsuarioAPI());
+        model.addAttribute("registroDTO", new RegistroDTO());
         return "vistas/inicio/login";
     }
 

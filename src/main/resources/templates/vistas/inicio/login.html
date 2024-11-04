@@ -16,22 +16,30 @@
 <div class="container" id="container">
     <div class="form-container sign-up">
         <!-- onsubmit="return true" -->
-        <form th:action="@{/usuarios/registrar}" th:object="${usuario}" method="post" id="register-form" onsubmit="return validarRegistro()">
+        <form th:action="@{/registrar}" th:object="${registroDTO}" method="post" id="register-form" onsubmit="return validarRegistro()">
             <h1>Regístrate</h1>
-            <div class="social-icons">
-                <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-            </div>
-            <span>o usa tu correo para registrarte</span>
-            <input id="usuarioRegistro" th:field="*{usuario}" type="text" placeholder="Usuario" required>
-            <small class="form-text" id="msgErrorUsuarioRegistro"></small>
-            <input id="claveRegistro" th:field="*{clave}" type="password" placeholder="Contraseña" required>
-            <small class="form-text" id="msgErrorClaveRegistro"></small>
-            <button type="submit">Registrarse</button>
-        </form>
-    </div>
-    <div class="form-container sign-in">
-        <!-- onsubmit="return validar()" | onsubmit="return validar('#msgError')"-->
+            <!--  <div class="social-icons">
+                 <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                 <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+             </div>
+             <span>o usa tu correo para registrarte</span> -->
+            <input id="idRegistro" th:field="*{id}" type="text" placeholder="Documento de identidad" required>
+            <small class="error-message" id="msgErrorIdRegistro"></small>
+            <input id="usuarioRegistro" th:field="*{nombre}" type="text" placeholder="Nombre completo" required>
+             <small class="error-message" id="msgErrorUsuarioRegistro"></small>
+            <input id="nombreRegistro" th:field="*{usuario}" type="text" placeholder="Usuario" required>
+            <small class="error-message" id="msgErrorNombreRegistro"></small>
+             <input id="correoRegistro" th:field="*{correo}" type="email" placeholder="Correo" required>
+             <small class="error-message" id="msgErrorcorreoRegistro"></small>
+             <input id="tlfRegistro" th:field="*{telefono}" type="text" placeholder="Teléfono" required>
+             <small class="error-message" id="msgErrorTlfRegistro"></small>
+             <input id="claveRegistro" th:field="*{clave}" type="password" placeholder="Contraseña" required>
+             <small class="error-message" id="msgErrorClaveRegistro"></small>
+             <button type="submit">Registrarse</button>
+         </form>
+     </div>
+     <div class="form-container sign-in">
+         <!-- onsubmit="return validar()" | onsubmit="return validar('#msgError')"-->
         <form action="/login" method="post" id="login-form" onsubmit="return validarLogin()">
             <h1>Ingreso</h1>
             <div class="social-icons">
