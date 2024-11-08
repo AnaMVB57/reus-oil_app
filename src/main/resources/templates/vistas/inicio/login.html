@@ -40,7 +40,7 @@
      </div>
      <div class="form-container sign-in">
          <!-- onsubmit="return validar()" | onsubmit="return validar('#msgError')"-->
-        <form action="/login" method="post" id="login-form" onsubmit="return validarLogin()">
+        <form th:action="@{/login}" method="post" id="login-form" onsubmit="return validarLogin()">
             <h1>Ingreso</h1>
             <div class="social-icons">
                 <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -48,10 +48,10 @@
             </div>
             <span>o usa tu email y contraseña</span>
             <input type="text" id="usuarioLogin" name="usuarioLogin" placeholder="Usuario">
-            <input type="password" id="claveLogin" name="claveLogin" placeholder="Contraseña">
-            <!-- <small class="" id="msgError"></small> -->
             <div class="alert alert-danger form-text" th:if="${error != null}" th:text="${error}" id="msgError"></div>
-            <a th:href="@{/usuarios/usuarioRecuperarContrasena}">¿Olvidó su contraseña?</a>
+            <input type="password" id="claveLogin" name="claveLogin" placeholder="Contraseña">
+            <div class="alert alert-danger form-text" th:if="${error != null}" th:text="${error}" ></div>
+            <a th:href="@{/usuario/usuarioRecuperarContrasena}">¿Olvidó su contraseña?</a>
             <!-- onclick="return validar()" -->
             <button type="submit">Ingresar</button>
         </form>

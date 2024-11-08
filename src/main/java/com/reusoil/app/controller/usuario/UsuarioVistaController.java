@@ -25,7 +25,7 @@ public class UsuarioVistaController {
         UsuarioEntity usuario = new UsuarioEntity();
         usuario.setEstado(true); // Inicializa el estado como activo
         model.addAttribute("modoEdicion", false);
-        model.addAttribute("perfiles", perfilService.obtenerPerfiles());
+        model.addAttribute("perfiles", perfilService.obtenerPerfilesPorEstado(true));
         model.addAttribute("usuarioGuardar", usuario);
         return "vistas/usuario/form_usuario";
     }
@@ -41,7 +41,8 @@ public class UsuarioVistaController {
     public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
         Optional<UsuarioEntity> usuario = usuarioService.obtenerUsuarioPorId(id);
         if (usuario.isPresent()) {
-            model.addAttribute("usuario", usuario.get());
+            model.addAttribute("usuarioGuardar", usuario.get());
+            model.addAttribute("perfiles", perfilService.obtenerPerfilesPorEstado(true));
             model.addAttribute("modoEdicion", true);
             return "vistas/usuario/form_usuario";
         }

@@ -1,4 +1,4 @@
-package com.reusoil.app.services.utils;
+package com.reusoil.app.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;

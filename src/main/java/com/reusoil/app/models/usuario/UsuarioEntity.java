@@ -2,13 +2,10 @@ package com.reusoil.app.models.usuario;
 
 import com.reusoil.app.models.perfil.PerfilEntity;
 import com.reusoil.app.models.persona.PersonaEntity;
+import com.reusoil.app.models.registro.RegistroDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-
-import java.util.Collection;
-import java.util.List;
 
 @Entity(name = "usuario")
 @Builder
@@ -39,5 +36,13 @@ public class UsuarioEntity {
 
     private boolean estado;
 
+    public static UsuarioEntity from(RegistroDTO registroDTO){
+        UsuarioEntity usuario = new UsuarioEntity();
+        usuario.setId(registroDTO.getId());
+        usuario.setUsuario(registroDTO.getUsuario());
+        usuario.setClave(registroDTO.getClave());
+        usuario.setEstado(true);
+        return usuario;
+    }
 
 }

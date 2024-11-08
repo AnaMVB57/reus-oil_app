@@ -26,6 +26,9 @@ public class PersonaController {
                                           Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", "Por favor, corrija los errores en el formulario");
+            model.addAttribute("modoEdicion", true);
+            model.addAttribute("persona", persona);
+            model.addAttribute("empresas", empresaService.obtenerEmpresasPorEstado(true));
             return "vistas/persona/form_persona";
         }
 
@@ -56,6 +59,9 @@ public class PersonaController {
             return "redirect:/persona/listado-personas";
         } catch (Exception e) {
             model.addAttribute("error", "Ocurrió un error al guardar la persona. Intente nuevamente.");
+            model.addAttribute("modoEdicion", true);
+            model.addAttribute("persona", persona);
+            model.addAttribute("empresas", empresaService.obtenerEmpresasPorEstado(true));
             return "vistas/persona/form_persona";
         }
     }

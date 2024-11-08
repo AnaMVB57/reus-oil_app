@@ -24,7 +24,7 @@
         <!-- Campo de volumen recogido -->
         <div class="form-group">
             <label for="volumenRecogido">Volumen Recogido (en litros):</label>
-            <input type="number" class="form-control" id="volumenRecogido" th:field="*{volumenRecogido}" step="0.01" required>
+            <input type="number" class="form-control" id="volumenRecogido" th:field="*{volumenRecogido}" min="0" step="0.1" required>
             <div th:if="${#fields.hasErrors('volumenRecogido')}" th:errors="*{volumenRecogido}" class="error-message"></div>
         </div>
 

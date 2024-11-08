@@ -23,4 +23,5 @@ public interface EmpresaService {
      void borradoLogico(Long id);
 
 
+     Optional<EmpresaEntity> obtenerEmpresaPorCorreo(String correo);
 }

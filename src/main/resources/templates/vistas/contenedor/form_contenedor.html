@@ -13,19 +13,22 @@
         <form th:action="@{/contenedor/guardar}" th:object="${contenedor}" method="post">
             <h1 th:text="${modoEdicion ? 'Editar' : 'Registrar'} + ' Contenedor'">Registrar Contenedor</h1>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="id" class="form-label">Identificador</label>
                 <input type="text" th:field="*{id}" id="id" class="form-control" placeholder="Id del contenedor" required>
-            </div>
+            </div> -->
+
+            <input type="hidden" th:field="*{id}" />
 
             <div class="mb-3">
                 <label for="capacidad" class="form-label">Capacidad Máxima (litros)</label>
-                <input type="number" th:field="*{capacidad}" id="capacidad" class="form-control" placeholder="Capacidad máxima en litros" required>
+                <input type="number" th:field="*{capacidad}" min="0" step="1" id="capacidad" class="form-control" placeholder="Capacidad máxima en litros" required>
             </div>
 
             <div class="mb-3">
                 <label for="ubicacion" class="form-label">Ubicación</label>
                 <input type="text" th:field="*{ubicacion}" id="ubicacion" class="form-control" placeholder="Ubicación del contenedor" required>
+                <div th:if="${#fields.hasErrors('ubicacion')}" th:errors="*{ubicacion}" class="error-message"></div>
             </div>
 
             <div class="mb-3">
@@ -35,7 +38,7 @@
 
             <div class="mb-3">
                 <label for="empresa" class="form-label">Empresa</label>
-                <select th:field="*{empresa}">
+                <select th:field="*{empresa}" class="form_select">
                     <option th:each="empresa : ${empresas}"
                             th:value="${empresa.id}"
                             th:text="${empresa.nombre}">

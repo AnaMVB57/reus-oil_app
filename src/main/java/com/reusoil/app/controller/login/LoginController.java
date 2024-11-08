@@ -1,8 +1,8 @@
 package com.reusoil.app.controller.login;
 
+import com.reusoil.app.models.perfil.PerfilEntity;
 import com.reusoil.app.models.registro.RegistroDTO;
 import com.reusoil.app.models.persona.PersonaEntity;
-import com.reusoil.app.models.usuario.UsuarioAPI;
 import com.reusoil.app.models.usuario.UsuarioEntity;
 import com.reusoil.app.services.perfil.PerfilService;
 import com.reusoil.app.services.persona.PersonaService;
@@ -27,7 +27,7 @@ public class LoginController {
 
     private final UsuarioService usuarioService;
     private final PersonaService personaService;
-
+    private final PerfilService perfilService;
 
     @PostMapping("/registrar")
     public String registrarUsuario(@Valid @ModelAttribute("registroDTO") RegistroDTO registroDTO,
@@ -46,11 +46,12 @@ public class LoginController {
             return "vistas/inicio/login";
         }
 
-        // Crear entidades de Usuario y Persona
-        // Crear entidades de Usuario y Persona
+        PerfilEntity perfil = perfilService.obtenerPerfilPorDescripcion("Usuario").orElse(null);
+
         UsuarioEntity usuario = UsuarioEntity.builder()
                 .usuario(registroDTO.getUsuario())
                 .clave(registroDTO.getClave())
+                .perfil(perfil)
                 .estado(true)
                 .build();
 
@@ -86,20 +87,17 @@ public class LoginController {
             model.addAttribute("error", "Todos los campos son obligatorios.");
             return "vistas/inicio/login";
         }
-
         if (usuarioActual.isEmpty()) {
             model.addAttribute("usuario", new UsuarioEntity());
             model.addAttribute("error", "Usuario no existe");
             return "vistas/inicio/login";
         }
-
         UsuarioEntity usuarioEntity = usuarioActual.get();
         if (!clave.equals(usuarioEntity.getClave())) {
             model.addAttribute("usuario", new UsuarioEntity());
             model.addAttribute("error", "Usuario o contraseña incorrectos.");
             return "vistas/inicio/login";
         }
-
         HttpSession session = request.getSession();
         session.setAttribute("usuarioId", usuarioEntity.getId());
 

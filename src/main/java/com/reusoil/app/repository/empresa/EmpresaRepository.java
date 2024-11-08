@@ -16,4 +16,6 @@ public interface EmpresaRepository extends JpaRepository<EmpresaEntity, Long> {
 
     List<EmpresaEntity> findByEstado(boolean estado);
 
+    Optional<EmpresaEntity> findByCorreo(String correo);
+
 }

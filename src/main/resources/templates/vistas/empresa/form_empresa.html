@@ -36,8 +36,10 @@
 
            <label for="direccion">Dirección</label>
            <input type="text" th:field="*{direccion}" placeholder="Dirección" required class="form-control">
+            <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="error-message" id="msgErrorDireccion"></div>
 
-           <label for="telefono">Teléfono</label>
+
+            <label for="telefono">Teléfono</label>
            <input type="text" th:field="*{telefono}" placeholder="Teléfono" required class="form-control">
             <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="error-message" id="msgErrorTelefono"></div>
 

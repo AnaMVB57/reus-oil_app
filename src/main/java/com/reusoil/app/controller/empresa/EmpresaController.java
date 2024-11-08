@@ -53,6 +53,13 @@ public class EmpresaController {
                 }
             }
 
+            Optional<EmpresaEntity> empresaConMismoCorreo = empresaService.obtenerEmpresaPorCorreo(empresa.getCorreo());
+            if (empresaConMismoCorreo.isPresent() && !empresaConMismoCorreo.get().getId().equals(empresa.getId())) {
+                bindingResult.rejectValue("correo", "error.empresa", "Ya existe una empresa con el mismo correo");
+                cargarModelo(model);
+                return "vistas/empresa/form_empresa";
+            }
+
             // Verificar si el nombre ya existe en otra empresa
             Optional<EmpresaEntity> empresaConMismoNombre = empresaService.obtenerEmpresaPorNombre(empresa.getNombre());
             if (empresaConMismoNombre.isPresent() && !empresaConMismoNombre.get().getId().equals(empresa.getId())) {
@@ -60,6 +67,7 @@ public class EmpresaController {
                 cargarModelo(model);
                 return "vistas/empresa/form_empresa";
             }
+
 
             // Guardar o actualizar la empresa según corresponda
             empresaService.guardar(empresa);

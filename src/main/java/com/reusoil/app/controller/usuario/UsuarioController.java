@@ -1,10 +1,9 @@
 package com.reusoil.app.controller.usuario;
 
-import com.reusoil.app.models.ciudad.CiudadEntity;
 import com.reusoil.app.models.usuario.UsuarioAPI;
 import com.reusoil.app.models.usuario.UsuarioEntity;
 import com.reusoil.app.services.usuario.UsuarioServiceImpl;
-import com.reusoil.app.services.utils.EmailService;
+import com.reusoil.app.utils.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

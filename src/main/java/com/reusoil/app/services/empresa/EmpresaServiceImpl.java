@@ -58,4 +58,9 @@ public class EmpresaServiceImpl implements EmpresaService {
         }
     }
 
+    @Override
+    public Optional<EmpresaEntity> obtenerEmpresaPorCorreo(String correo) {
+        return empresaRepository.findByCorreo(correo);
+    }
+
 }
