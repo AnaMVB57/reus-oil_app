@@ -38,7 +38,7 @@ public class UsuarioEntity {
 
     public static UsuarioEntity from(RegistroDTO registroDTO, PerfilEntity perfil) {
         return UsuarioEntity.builder()
-                .id(registroDTO.getId())
+                .id(Long.valueOf(registroDTO.getId()))
                 .usuario(registroDTO.getUsuario())
                 .perfil(perfil)
                 .clave(registroDTO.getClave())

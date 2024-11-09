@@ -62,6 +62,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findByUsuario(nombreUsuario).isPresent();
     }
 
+    @Override
+    public Optional<UsuarioEntity> obtenerUsuarioPorCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo);
+    }
+
 
     @Override
     @Transactional(readOnly = true)
