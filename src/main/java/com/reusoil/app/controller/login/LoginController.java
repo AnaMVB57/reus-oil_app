@@ -54,6 +54,14 @@ public class LoginController {
             return "vistas/inicio/login";
         }
 
+        // Validación para el correo duplicado
+        Optional<PersonaEntity> identificacionExistente = personaService.obtenerPersonaPorId(Long.valueOf(registroDTO.getId()));
+        if (identificacionExistente.isPresent()) {
+            bindingResult.rejectValue("id", "error.id", "Esta identificación ya está registrada.");
+            model.addAttribute("registroDTO", registroDTO);
+            return "vistas/inicio/login";
+        }
+
         // Validación para el usuario duplicado
         Optional<UsuarioEntity> usuarioExistente = usuarioService.obtenerUsuarioPorUsuario(registroDTO.getUsuario());
         if (usuarioExistente.isPresent()) {
@@ -63,9 +71,17 @@ public class LoginController {
         }
 
         // Validación para el correo duplicado
-        Optional<UsuarioEntity> correoExistente = usuarioService.obtenerUsuarioPorCorreo(registroDTO.getCorreo());
+        Optional<PersonaEntity> correoExistente = personaService.obtenerPersonaPorCorreo(registroDTO.getCorreo());
         if (correoExistente.isPresent()) {
-            bindingResult.rejectValue("correo", "error.correo", "Ya existe un usuario con ese correo.");
+            bindingResult.rejectValue("correo", "error.correo", "Este correo está en uso.");
+            model.addAttribute("registroDTO", registroDTO);
+            return "vistas/inicio/login";
+        }
+
+        // Validación para el telefono duplicado
+        Optional<PersonaEntity> telefonoExistente = personaService.obtenerPersonaPorTelefono(registroDTO.getTelefono());
+        if (telefonoExistente.isPresent()) {
+            bindingResult.rejectValue("telefono", "error.telefono", "Este número celular ya fue registrado.");
             model.addAttribute("registroDTO", registroDTO);
             return "vistas/inicio/login";
         }

@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface UsuarioService {
 
     List<UsuarioEntity> obtenerUsuariosTodos();
+
     Optional<UsuarioEntity> obtenerUsuarioPorId(Long id);
     void eliminarUsuarioPorId(Long id);
     UsuarioEntity guardarUsuario(UsuarioEntity usuarioEntity);
@@ -17,5 +18,4 @@ public interface UsuarioService {
     List<UsuarioEntity> obtenerUsuariosPorEstado(boolean estado);
     public boolean existeUsuarioPorNombre(String nombreUsuario);
 
-    Optional<UsuarioEntity> obtenerUsuarioPorCorreo(String correo);
 }

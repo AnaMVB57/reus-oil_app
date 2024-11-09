@@ -17,4 +17,8 @@ public interface PersonaService {
     List<PersonaEntity> obtenerPersonasPorEstado(boolean estado);
 
     Optional<PersonaEntity> obtenerPersonaPorUsuarioId(Long id);
+
+    Optional<PersonaEntity> obtenerPersonaPorCorreo(String correo);
+
+    Optional<PersonaEntity> obtenerPersonaPorTelefono(String telefono);
 }

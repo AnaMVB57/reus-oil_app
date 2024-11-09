@@ -58,4 +58,14 @@ public class PersonaServiceImpl implements PersonaService {
     public Optional<PersonaEntity> obtenerPersonaPorUsuarioId(Long id) {
         return personaRepository.findByUsuarioId(id);
     }
+
+    @Override
+    public Optional<PersonaEntity> obtenerPersonaPorCorreo(String correo) {
+        return personaRepository.findByCorreo(correo);
+    }
+
+    @Override
+    public Optional<PersonaEntity> obtenerPersonaPorTelefono(String telefono) {
+        return personaRepository.findByTelefono(telefono);
+    }
 }

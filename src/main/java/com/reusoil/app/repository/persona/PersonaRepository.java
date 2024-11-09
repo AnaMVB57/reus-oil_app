@@ -11,4 +11,8 @@ public interface PersonaRepository extends JpaRepository<PersonaEntity, Long> {
     Optional<PersonaEntity> findByNombre(String nombre);
     List<PersonaEntity> findByEstado(boolean estado);
     Optional<PersonaEntity> findByUsuarioId(Long id);
+
+    Optional<PersonaEntity> findByCorreo(String correo);
+
+    Optional<PersonaEntity> findByTelefono(String telefono);
 }

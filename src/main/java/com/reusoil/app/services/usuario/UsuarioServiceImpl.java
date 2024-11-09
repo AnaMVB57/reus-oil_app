@@ -1,6 +1,5 @@
 package com.reusoil.app.services.usuario;
 
-import com.reusoil.app.models.tipo_sensor.TipoSensorEntity;
 import com.reusoil.app.models.usuario.UsuarioEntity;
 import com.reusoil.app.repository.usuario.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -60,11 +59,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional(readOnly = true)
     public boolean existeUsuarioPorNombre(String nombreUsuario) {
         return usuarioRepository.findByUsuario(nombreUsuario).isPresent();
-    }
-
-    @Override
-    public Optional<UsuarioEntity> obtenerUsuarioPorCorreo(String correo) {
-        return usuarioRepository.findByCorreo(correo);
     }
 
 
