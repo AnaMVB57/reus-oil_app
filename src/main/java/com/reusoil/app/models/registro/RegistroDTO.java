@@ -23,7 +23,7 @@ public class RegistroDTO {
 
     // Campos de Usuario
     @NotBlank(message = "El usuario no puede estar vacío.")
-    @Size(min = 4, message = "El usuario debe tener al menos 4 caracteres.")
+    @Size(min = 3, message = "El usuario debe tener al menos 3 caracteres.")
     private String usuario;
 
     @NotBlank(message = "La contraseña no puede estar vacía.")

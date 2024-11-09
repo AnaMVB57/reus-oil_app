@@ -48,23 +48,11 @@ public class LoginController {
 
         PerfilEntity perfil = perfilService.obtenerPerfilPorDescripcion("Usuario").orElse(null);
 
-        UsuarioEntity usuario = UsuarioEntity.builder()
-                .usuario(registroDTO.getUsuario())
-                .clave(registroDTO.getClave())
-                .perfil(perfil)
-                .estado(true)
-                .build();
+        UsuarioEntity usuario = UsuarioEntity.from(registroDTO, perfil);
 
         usuarioService.guardarUsuario(usuario);
 
-        PersonaEntity persona = PersonaEntity.builder()
-                .id(registroDTO.getId())
-                .nombre(registroDTO.getNombre())
-                .correo(registroDTO.getCorreo())
-                .telefono(registroDTO.getTelefono())
-                .usuario(usuario)
-                .estado(true)
-                .build();
+        PersonaEntity persona = PersonaEntity.from(registroDTO, usuario);
 
         personaService.guardarPersona(persona);
 
@@ -75,27 +63,27 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String iniciarSesion(@RequestParam("usuarioLogin") String usuario,
-                                @RequestParam("claveLogin") String clave,
-                                Model model, HttpServletRequest request) {
+    public String iniciarSesion(UsuarioEntity usuario, Model model, HttpServletRequest request) {
 
-        var usuarioActual = usuarioService.obtenerUsuarioPorUsuario(usuario);
+        model.addAttribute("registroDTO", new RegistroDTO());
+
+        var usuarioActual = usuarioService.obtenerUsuarioPorUsuario(usuario.getUsuario());
 
         // Verifica si los campos están vacíos
-        if (usuario.isEmpty() || clave.isEmpty()) {
-            model.addAttribute("usuario", new UsuarioEntity());
-            model.addAttribute("error", "Todos los campos son obligatorios.");
+        if (usuario.areUsuarioAndClaveEmpty()) {
+            model.addAttribute("usuarioLogin", new UsuarioEntity());
+            model.addAttribute("errorLogin", "Ingrese sus credenciales, por favor.");
             return "vistas/inicio/login";
         }
         if (usuarioActual.isEmpty()) {
-            model.addAttribute("usuario", new UsuarioEntity());
-            model.addAttribute("error", "Usuario no existe");
+            model.addAttribute("usuarioLogin", new UsuarioEntity());
+            model.addAttribute("errorLogin", "El usuario ingresado no existe");
             return "vistas/inicio/login";
         }
         UsuarioEntity usuarioEntity = usuarioActual.get();
-        if (!clave.equals(usuarioEntity.getClave())) {
-            model.addAttribute("usuario", new UsuarioEntity());
-            model.addAttribute("error", "Usuario o contraseña incorrectos.");
+        if (!usuario.getClave().equals(usuarioEntity.getClave())) {
+            model.addAttribute("usuarioLogin", new UsuarioEntity());
+            model.addAttribute("errorLogin", "Usuario o contraseña incorrectos.");
             return "vistas/inicio/login";
         }
         HttpSession session = request.getSession();

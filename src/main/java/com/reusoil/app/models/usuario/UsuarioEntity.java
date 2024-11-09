@@ -36,13 +36,17 @@ public class UsuarioEntity {
 
     private boolean estado;
 
-    public static UsuarioEntity from(RegistroDTO registroDTO){
-        UsuarioEntity usuario = new UsuarioEntity();
-        usuario.setId(registroDTO.getId());
-        usuario.setUsuario(registroDTO.getUsuario());
-        usuario.setClave(registroDTO.getClave());
-        usuario.setEstado(true);
-        return usuario;
+    public static UsuarioEntity from(RegistroDTO registroDTO, PerfilEntity perfil) {
+        return UsuarioEntity.builder()
+                .id(registroDTO.getId())
+                .usuario(registroDTO.getUsuario())
+                .perfil(perfil)
+                .clave(registroDTO.getClave())
+                .estado(true)
+                .build();
     }
 
+    public boolean areUsuarioAndClaveEmpty() {
+        return usuario.isEmpty() || clave.isEmpty();
+    }
 }

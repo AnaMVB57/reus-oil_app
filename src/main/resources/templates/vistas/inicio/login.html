@@ -34,23 +34,23 @@
              <input id="tlfRegistro" th:field="*{telefono}" type="text" placeholder="Teléfono" required>
              <small class="error-message" id="msgErrorTlfRegistro"></small>
              <input id="claveRegistro" th:field="*{clave}" type="password" placeholder="Contraseña" required>
-             <small class="error-message" id="msgErrorClaveRegistro"></small>
-             <button type="submit">Registrarse</button>
+            <!-- <small class="error-message" id="msgErrorClaveRegistro"></small> -->
+            <div class="alert alert-danger form-text" th:if="${error != null}" th:text="${error}" ></div>
+            <button type="submit">Registrarse</button>
          </form>
      </div>
      <div class="form-container sign-in">
          <!-- onsubmit="return validar()" | onsubmit="return validar('#msgError')"-->
-        <form th:action="@{/login}" method="post" id="login-form" onsubmit="return validarLogin()">
+        <form th:action="@{/login}" th:object="${usuarioLogin}" method="post" id="login-form" onsubmit="return validarLogin()">
             <h1>Ingreso</h1>
             <div class="social-icons">
                 <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                 <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
             </div>
             <span>o usa tu email y contraseña</span>
-            <input type="text" id="usuarioLogin" name="usuarioLogin" placeholder="Usuario">
-            <div class="alert alert-danger form-text" th:if="${error != null}" th:text="${error}" id="msgError"></div>
-            <input type="password" id="claveLogin" name="claveLogin" placeholder="Contraseña">
-            <div class="alert alert-danger form-text" th:if="${error != null}" th:text="${error}" ></div>
+            <input type="text" id="usuarioLogin" name="usuarioLogin" th:field="*{usuario}" placeholder="Usuario">
+            <input type="password" id="claveLogin" name="claveLogin" th:field="*{clave}" placeholder="Contraseña">
+            <div class="alert alert-danger form-text" th:if="${errorLogin != null}" th:text="${errorLogin}" ></div>
             <a th:href="@{/usuario/usuarioRecuperarContrasena}">¿Olvidó su contraseña?</a>
             <!-- onclick="return validar()" -->
             <button type="submit">Ingresar</button>

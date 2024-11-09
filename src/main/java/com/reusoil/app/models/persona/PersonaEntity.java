@@ -40,15 +40,14 @@ public class PersonaEntity {
 
     private boolean estado;
 
-    public static PersonaEntity from(RegistroDTO registroDTO){
-        PersonaEntity persona = new PersonaEntity();
-        persona.setId(registroDTO.getId());
-        persona.setNombre(registroDTO.getNombre());
-        persona.setCorreo(registroDTO.getCorreo());
-        persona.setTelefono(registroDTO.getTelefono());
-        persona.setEmpresa(null); //tener cuidado con esta parte, por si acaso
-//        persona.setUsuario(registroDTO.getUsuario()); // Usuario es String en RegistroDTO
-        persona.setEstado(true);
-        return persona;
+    public static PersonaEntity from(RegistroDTO registroDTO, UsuarioEntity usuario){
+        return PersonaEntity.builder()
+                .id(registroDTO.getId())
+                .nombre(registroDTO.getNombre())
+                .correo(registroDTO.getCorreo())
+                .telefono(registroDTO.getTelefono())
+                .usuario(usuario)
+                .estado(true)
+                .build();
     }
 }
