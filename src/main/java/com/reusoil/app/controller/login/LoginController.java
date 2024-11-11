@@ -35,19 +35,6 @@ public class LoginController {
 
         model.addAttribute("usuarioLogin", new UsuarioEntity());
 
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("error", "Por favor, corrija los errores en el formulario");
-//            return "vistas/inicio/login";
-//        }
-//
-//        // Validar que el nombre de usuario no esté duplicado
-//        Optional<UsuarioEntity> usuarioExistente = usuarioService.obtenerUsuarioPorUsuario(registroDTO.getUsuario());
-//        if (usuarioExistente.isPresent()) {
-//            bindingResult.rejectValue("usuario", "error.usuario", "Ya existe un usuario con ese nombre.");
-//            model.addAttribute("registroDTO", registroDTO);
-//            return "vistas/inicio/login";
-//        }
-
         // Verificar si hay errores de validación en los campos básicos
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", "Por favor, corrija los errores en el formulario");

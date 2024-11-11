@@ -1,20 +1,16 @@
 package com.reusoil.app.models.registro;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
 public class RegistroDTO {
 
-
-        @NotBlank(message = "El documento de identidad es obligatorio")
-        private String id;
+        @NotNull(message = "El documento de identidad es obligatorio")
+        private Long id;
 
         @NotBlank(message = "El nombre completo es obligatorio")
-        @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "El nombre solo debe contener letras y espacios")
+        @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚÑñ ]*$", message = "Ingrese un nombre válido.")
         private String nombre;
 
         @NotBlank(message = "El usuario es obligatorio")
@@ -29,7 +25,7 @@ public class RegistroDTO {
         private String telefono;
 
         @NotBlank(message = "La contraseña es obligatoria")
-        @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
+        @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
         private String clave;
 
         // Getters y setters

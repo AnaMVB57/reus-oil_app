@@ -15,7 +15,7 @@ import lombok.*;
 public class PersonaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "El nombre no puede estar en blanco.")

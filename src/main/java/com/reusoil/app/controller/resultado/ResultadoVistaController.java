@@ -27,4 +27,10 @@ public class ResultadoVistaController {
         model.addAttribute("mensaje", "Listado de Resultados");
         return "vistas/resultado/listado_resultado"; // Nombre de la vista Thymeleaf
     }
+
+    //para iniciar la pagina
+    @GetMapping("/solicitarResultados")
+    public String iniciarPeso(Model model) {
+        return "vistas/resultado/obtener_resultado";
+    }
 }

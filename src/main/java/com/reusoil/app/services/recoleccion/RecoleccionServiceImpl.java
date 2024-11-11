@@ -2,20 +2,20 @@ package com.reusoil.app.services.recoleccion;
 
 import com.reusoil.app.models.recoleccion.RecoleccionEntity;
 import com.reusoil.app.repository.recoleccion.RecoleccionRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
+@Transactional
 public class RecoleccionServiceImpl implements RecoleccionService {
 
     // Aquí inyecta el repositorio correspondiente
     private final RecoleccionRepository recoleccionRepository;
-
-    public RecoleccionServiceImpl(RecoleccionRepository recoleccionRepository) {
-        this.recoleccionRepository = recoleccionRepository;
-    }
 
     @Override
     public void guardar(RecoleccionEntity recoleccion) {

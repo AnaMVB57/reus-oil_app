@@ -24,18 +24,18 @@
              </div>
              <span>o usa tu correo para registrarte</span> -->
             <input id="idRegistro" th:field="*{id}" type="text" placeholder="Documento de identidad" required>
-            <small class="error-message" id="msgErrorIdRegistro"></small>
+            <small class="error-message" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></small>
             <input id="usuarioRegistro" th:field="*{nombre}" type="text" placeholder="Nombre completo" required>
-             <small class="error-message" id="msgErrorUsuarioRegistro"></small>
+            <small class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
             <input id="nombreRegistro" th:field="*{usuario}" type="text" placeholder="Usuario" required>
-            <small class="error-message" id="msgErrorNombreRegistro"></small>
+            <small class="error-message" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></small>
              <input id="correoRegistro" th:field="*{correo}" type="email" placeholder="Correo" required>
-             <small class="error-message" id="msgErrorcorreoRegistro"></small>
+            <small class="error-message" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></small>
              <input id="tlfRegistro" th:field="*{telefono}" type="text" placeholder="Teléfono" required>
-             <small class="error-message" id="msgErrorTlfRegistro"></small>
+            <small class="error-message" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
              <input id="claveRegistro" th:field="*{clave}" type="password" placeholder="Contraseña" required>
-            <!-- <small class="error-message" id="msgErrorClaveRegistro"></small> -->
-            <div class="alert alert-danger form-text" th:if="${error != null}" th:text="${error}" ></div>
+            <small class="error-message" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small>
+            <div class="error-message" th:if="${error != null}" th:text="${error}" ></div>
             <button type="submit">Registrarse</button>
          </form>
      </div>
