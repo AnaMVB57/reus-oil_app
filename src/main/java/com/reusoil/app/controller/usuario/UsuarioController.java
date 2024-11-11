@@ -1,7 +1,12 @@
 package com.reusoil.app.controller.usuario;
 
+import com.reusoil.app.models.perfil.PerfilEntity;
+import com.reusoil.app.models.persona.PersonaEntity;
+import com.reusoil.app.models.registro.RegistroDTO;
 import com.reusoil.app.models.usuario.UsuarioAPI;
 import com.reusoil.app.models.usuario.UsuarioEntity;
+import com.reusoil.app.services.perfil.PerfilService;
+import com.reusoil.app.services.persona.PersonaService;
 import com.reusoil.app.services.usuario.UsuarioServiceImpl;
 import com.reusoil.app.utils.EmailService;
 import jakarta.validation.Valid;
@@ -22,6 +27,8 @@ public class UsuarioController {
 
     private final UsuarioServiceImpl usuarioService;
     private final EmailService emailService;
+    private final PerfilService perfilService;
+    private final PersonaService personaService;
 
     @PostMapping("/registrar")
     public String registrarUsuario(@ModelAttribute UsuarioAPI usuario) {
@@ -35,36 +42,77 @@ public class UsuarioController {
     }
 
     @PostMapping("/guardar")
-    public String crearOActualizarUsuario(@Valid @ModelAttribute("usuarioGuardar") UsuarioEntity usuarioGuardar,
+    public String crearOActualizarUsuario(@Valid @ModelAttribute("registroDTO") RegistroDTO registroDTO,
                                           BindingResult bindingResult,
                                           Model model) {
         // Verificar errores de validación
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", "Por favor, corrija los errores en el formulario");
-            return "vistas/usuario/form_usuario"; // Volver al formulario con errores de validación
+            return "vistas/usuario/personaUsuario";  // Volver al formulario con mensaje de error
         }
 
         try {
-            // Verificar si existe un tipo de sensor con la misma descripción
-            Optional<UsuarioEntity> usuarioExistente = usuarioService.obtenerUsuarioPorUsuario(usuarioGuardar.getUsuario());
-
-            // Si se encuentra una descripción duplicada y no es el mismo registro (evitar duplicados en actualización)
-            if (usuarioExistente.isPresent() && !usuarioExistente.get().getId().equals(usuarioGuardar.getId())) {
-                bindingResult.rejectValue("usuario", "error.usuarioGuardar", "Ya existe un usuario con ese nombre.");
-                model.addAttribute("usuarioGuardar", usuarioGuardar); // Mantener datos en el formulario
-                return "vistas/usuario/form_usuario"; // Volver al formulario con mensaje de error
+            // Validación para el correo duplicado
+            Optional<PersonaEntity> identificacionExistente = personaService.obtenerPersonaPorId(Long.valueOf(registroDTO.getId()));
+            if (identificacionExistente.isPresent()) {
+                bindingResult.rejectValue("id", "error.id", "Esta identificación ya está registrada.");
+                model.addAttribute("registroDTO", registroDTO);
+                return "vistas/usuario/personaUsuario";  // Volver al formulario con mensaje de error
             }
 
-            usuarioService.guardarUsuario(usuarioGuardar);
+            // Validación para el usuario duplicado
+            Optional<UsuarioEntity> usuarioExistente = usuarioService.obtenerUsuarioPorUsuario(registroDTO.getUsuario());
+            if (usuarioExistente.isPresent()) {
+                bindingResult.rejectValue("usuario", "error.usuario", "Ya existe un usuario con ese nombre.");
+                model.addAttribute("registroDTO", registroDTO);
+                return "vistas/usuario/personaUsuario";  // Volver al formulario con mensaje de error
+            }
+
+            // Validación para el correo duplicado
+            Optional<PersonaEntity> correoExistente = personaService.obtenerPersonaPorCorreo(registroDTO.getCorreo());
+            if (correoExistente.isPresent()) {
+                bindingResult.rejectValue("correo", "error.correo", "Este correo está en uso.");
+                model.addAttribute("registroDTO", registroDTO);
+                return "vistas/usuario/personaUsuario";  // Volver al formulario con mensaje de error
+            }
+
+            // Validación para el telefono duplicado
+            Optional<PersonaEntity> telefonoExistente = personaService.obtenerPersonaPorTelefono(registroDTO.getTelefono());
+            if (telefonoExistente.isPresent()) {
+                bindingResult.rejectValue("telefono", "error.telefono", "Este número celular ya fue registrado.");
+                model.addAttribute("registroDTO", registroDTO);
+                return "vistas/usuario/personaUsuario";  // Volver al formulario con mensaje de error
+            }
+
+            // Obtener perfil de usuario
+            PerfilEntity perfil = perfilService.obtenerPerfilPorDescripcion("Usuario").orElse(null);
+
+            // Crear instancia de UsuarioEntity con los datos de RegistroDTO y perfil
+            UsuarioEntity usuario = UsuarioEntity.from(registroDTO, perfil);
+
+            // Guardar usuario en la base de datos
+            usuarioService.guardarUsuario(usuario);
+
+            // Crear y asociar la PersonaEntity con el UsuarioEntity
+            PersonaEntity persona = PersonaEntity.from(registroDTO, usuario);
+
+            // Guardar persona en la base de datos
+            personaService.guardarPersona(persona);
+
             return "redirect:/usuario/listado-usuarios";
 
         } catch (Exception e) {
-            model.addAttribute("error", "Ocurrió un error al guardar la ciudad");
-            model.addAttribute("usuarioGuardar", usuarioGuardar); // Reenviar los datos en caso de error
-            return "vistas/usuario/form_usuario"; // Volver al formulario con mensaje de error
+            model.addAttribute("error", "Ocurrió un error al guardar el usuario y la persona");
+            model.addAttribute("registroDTO", registroDTO); // Reenviar los datos en caso de error
+            return "vistas/usuario/personaUsuario";  // Volver al formulario con mensaje de error
         }
     }
 
+    @GetMapping("/eliminar/{id}")
+    public String borrarUsuario(@PathVariable Long id) {
+        usuarioService.borradoLogico(id);
+        return "redirect:/usuario/listado-usuarios";
+    }
 
     @GetMapping("/usuarioRecuperarContrasena")
     public String recuperarUsuario(Model model) {
@@ -104,16 +152,5 @@ public class UsuarioController {
     public UsuarioEntity obtenerUsuario(@PathVariable Long id) {
         return usuarioService.obtenerUsuarioPorId(id).orElse(null);
     }
-
-
-//    @PutMapping("/actualizar")
-//    public UsuarioEntity actualizarUsuario(@RequestBody UsuarioEntity usuarioEntity) {
-//        return usuarioService.guardarUsuario(usuarioEntity);
-//    }
-
-    // @DeleteMapping("/eliminar/{id}")
-    // public void eliminarUsuario(@PathVariable Long id) {
-    //     usuarioService.eliminarUsuario(id);
-    // }
 
 }

@@ -1,7 +1,12 @@
 package com.reusoil.app.controller.usuario;
 
+import com.reusoil.app.models.persona.PersonaEntity;
+import com.reusoil.app.models.registro.RegistroDTO;
 import com.reusoil.app.models.usuario.UsuarioEntity;
+import com.reusoil.app.services.perfil.PerfilService;
 import com.reusoil.app.services.perfil.PerfilServiceImpl;
+import com.reusoil.app.services.persona.PersonaService;
+import com.reusoil.app.services.usuario.UsuarioService;
 import com.reusoil.app.services.usuario.UsuarioServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,17 +22,18 @@ import java.util.Optional;
 @RequestMapping("/usuario")
 public class UsuarioVistaController {
 
-    private final UsuarioServiceImpl usuarioService;
-    private final PerfilServiceImpl perfilService;
+    private final UsuarioService usuarioService;
+    private final PerfilService perfilService;
+    private final PersonaService personaService;
+
 
     @GetMapping("/formulario-usuario")
     public String mostrarFormularioUsuario(Model model) {
-        UsuarioEntity usuario = new UsuarioEntity();
-        usuario.setEstado(true); // Inicializa el estado como activo
+
         model.addAttribute("modoEdicion", false);
         model.addAttribute("perfiles", perfilService.obtenerPerfilesPorEstado(true));
-        model.addAttribute("usuarioGuardar", usuario);
-        return "vistas/usuario/form_usuario";
+        model.addAttribute("registroDTO", new RegistroDTO());
+        return "vistas/usuario/personaUsuario";
     }
 
     @GetMapping("/listado-usuarios")
@@ -39,12 +45,15 @@ public class UsuarioVistaController {
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
-        Optional<UsuarioEntity> usuario = usuarioService.obtenerUsuarioPorId(id);
-        if (usuario.isPresent()) {
-            model.addAttribute("usuarioGuardar", usuario.get());
+        PersonaEntity persona = personaService.obtenerPersonaPorId(id).get();
+        UsuarioEntity usuario = usuarioService.obtenerUsuarioPorId(id).get();
+        RegistroDTO registroDTO = RegistroDTO.from(persona, usuario);
+
+        if (usuarioService.obtenerUsuarioPorId(id).isPresent()) {
+            model.addAttribute("registroDTO", registroDTO);
             model.addAttribute("perfiles", perfilService.obtenerPerfilesPorEstado(true));
             model.addAttribute("modoEdicion", true);
-            return "vistas/usuario/form_usuario";
+            return "vistas/usuario/personaUsuario";
         }
         return "redirect:/usuario/listado-usuarios";
     }

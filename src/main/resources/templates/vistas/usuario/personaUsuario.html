@@ -1,84 +1,71 @@
-    <!DOCTYPE html>
-    <html lang="es" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link rel="stylesheet" href="/css/style.css">
-        <link rel="icon" type="image/jfif" href="/img/Reusoil.jfif">
-        <title>Registro | Reus-Oil</title>
-    </head>
-    <script src="/js/script.js"></script>
-    <body>
-    <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form th:action="@{/registrar}" th:object="${registroDTO}" method="post" id="register-form" onsubmit="return validarRegistro()">
-                <h1>Regístrate</h1>
-                <input id="idRegistro" th:field="*{id}" type="text" placeholder="Documento de identidad" required>
-                <small class="error-message" id="msgErrorIdRegistro"></small>
-                <input id="nombreCompleto" th:field="*{nombre}" type="text" placeholder="Nombre completo" required>
-                <small class="error-message" id="msgErrorNombreCompleto"></small>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{plantillas/base :: base-head}"></head>
+<title>Registro de Usuario</title>
+<link rel="stylesheet" th:href="@{/css/forms.css}">
+<body>
+<header th:replace="~{plantillas/base :: base-header}"></header>
 
-                <!-- Usuario -->
-                <input id="usuarioRegistro" th:field="*{usuario}" type="text" placeholder="Usuario" required>
-                <small class="error-message" id="msgErrorUsuarioRegistro"></small>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Registro de Usuario</h1>
 
-                <!-- Email y Teléfono para Persona -->
-                <input id="correoRegistro" th:field="*{correo}" type="email" placeholder="Correo" required>
-                <small class="error-message" id="msgErrorCorreoRegistro"></small>
-                <input id="tlfRegistro" th:field="*{telefono}" type="text" placeholder="Teléfono" required>
-                <small class="error-message" id="msgErrorTlfRegistro"></small>
+    <form th:action="@{/usuario/guardar}" th:object="${registroDTO}" method="post" id="register-form" onsubmit="return validarRegistro()">
+        <!-- Campo de Documento de Identidad -->
 
-                <!-- Contraseña de Usuario -->
-                <input id="claveRegistro" th:field="*{clave}" type="password" placeholder="Contraseña" required>
-                <small class="error-message" id="msgErrorClaveRegistro"></small>
-
-                <!-- Selección de Perfil (ejemplo)
-                <div class="mb-3">
-                    <label for="perfil">Perfil</label>
-                    <select id="perfil" th:field="*{perfil.id}" class="form-control" required>
-                        <option th:each="perfil : ${perfiles}" th:value="${perfil.id}" th:text="${perfil.nombre}"></option>
-                    </select>
-                </div>-->
-
-                <button type="submit">Registrarse</button>
-            </form>
+        <div class="form-group">
+            <label for="idRegistro">Documento de Identidad:</label>
+            <input id="idRegistro" type="text" class="form-control" th:field="*{id}" placeholder="Documento de identidad" required>
+            <small class="form-text error-message" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></small>
         </div>
 
-        <!-- Formulario de Ingreso -->
-        <div class="form-container sign-in">
-            <form th:action="@{/login}" method="post" id="login-form" onsubmit="return validarLogin()">
-                <h1>Ingreso</h1>
-                <input type="text" id="usuarioLogin" name="usuarioLogin" placeholder="Usuario">
-                <div class="alert alert-danger form-text" th:if="${error != null}" th:text="${error}" id="msgError"></div>
-                <input type="password" id="claveLogin" name="claveLogin" placeholder="Contraseña">
-                <div class="alert alert-danger form-text" th:if="${error != null}" th:text="${error}"></div>
-                <a th:href="@{/usuario/usuarioRecuperarContrasena}">¿Olvidó su contraseña?</a>
-                <button type="submit">Ingresar</button>
-            </form>
+        <!-- Campo de Nombre Completo -->
+        <div class="form-group">
+            <label for="nombreCompleto">Nombre Completo:</label>
+            <input id="nombreCompleto" type="text" class="form-control" th:field="*{nombre}" placeholder="Nombre completo" required>
+            <small class="form-text error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
         </div>
 
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <div class="image-container">
-                        <img src="/img/Reusoil.jfif" alt="Reus-Oil Logo">
-                    </div>
-                    <h1>¡Bienvenido!</h1>
-                    <button class="hidden" id="login">Ingresar</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <div class="image-container">
-                        <img src="/img/Reusoil.jfif" alt="Reus-Oil Logo">
-                    </div>
-                    <h1>¡Hola!</h1>
-                    <p>Regístrate con tus datos</p>
-                    <button class="hidden" id="register" onsubmit="return validar()">Registrarse</button>
-                </div>
-            </div>
+        <!-- Campo de Nombre de Usuario -->
+        <div class="form-group">
+            <label for="usuarioRegistro">Nombre de Usuario:</label>
+            <input id="usuarioRegistro" type="text" class="form-control" th:field="*{usuario}" placeholder="Usuario" required>
+            <small class="form-text error-message" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></small>
         </div>
-    </div>
 
-    </body>
-    </html>
+        <!-- Campo de Correo -->
+        <div class="form-group">
+            <label for="correoRegistro">Correo:</label>
+            <input id="correoRegistro" type="email" class="form-control" th:field="*{correo}" placeholder="Correo" required>
+            <small class="form-text error-message" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></small>
+        </div>
+
+        <!-- Campo de Teléfono -->
+        <div class="form-group">
+            <label for="tlfRegistro">Teléfono:</label>
+            <input id="tlfRegistro" type="text" class="form-control" th:field="*{telefono}" placeholder="Teléfono" required>
+            <small class="form-text error-message" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
+        </div>
+
+        <!-- Campo de Contraseña -->
+        <div class="form-group">
+            <label for="claveRegistro">Contraseña:</label>
+            <input id="claveRegistro" type="password" class="form-control" th:field="*{clave}" placeholder="Contraseña" required>
+            <small class="form-text error-message" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small>
+        </div>
+
+
+        <!-- Estado del Usuario -->
+
+        <!-- Botones de Acción -->
+        <button type="submit" class="btn btn-sm btn-success">Guardar</button>
+        <a th:href="@{/usuario/listado-usuarios}" class="btn btn-sm btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div th:insert="plantillas/base :: base-footer"></div>
+
+</body>
+</html>

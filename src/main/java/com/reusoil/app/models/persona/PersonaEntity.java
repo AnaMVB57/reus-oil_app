@@ -42,7 +42,7 @@ public class PersonaEntity {
 
     public static PersonaEntity from(RegistroDTO registroDTO, UsuarioEntity usuario){
         return PersonaEntity.builder()
-                .id(Long.valueOf(registroDTO.getId()))
+                .id((registroDTO.getId()))
                 .nombre(registroDTO.getNombre())
                 .correo(registroDTO.getCorreo())
                 .telefono(registroDTO.getTelefono())
@@ -50,5 +50,10 @@ public class PersonaEntity {
                 .estado(true)
                 .build();
     }
+
+//    public static void relacionarConEmpresa(Long empresaId, Long usuarioId){
+//        EmpresaEntity empresa = empresaService.obtenerEmpresaPorId(empresaId);
+//        return PersonaEntity.builder().empresa(empresa)
+//    }
 
 }

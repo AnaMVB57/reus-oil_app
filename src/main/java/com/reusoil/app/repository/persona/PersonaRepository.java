@@ -19,4 +19,5 @@ public interface PersonaRepository extends JpaRepository<PersonaEntity, Long> {
 
     Optional<PersonaEntity> findByTelefono(String telefono);
 
+//    void relacionarConEmpresa(Long empresaId, Long usuarioId);
 }

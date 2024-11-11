@@ -1,7 +1,7 @@
 package com.reusoil.app.controller.resultado;
 
 import com.reusoil.app.models.resultado.ResultadoEntity;
-import com.reusoil.app.repository.ResultadoRepository;
+import com.reusoil.app.repository.resultado.ResultadoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

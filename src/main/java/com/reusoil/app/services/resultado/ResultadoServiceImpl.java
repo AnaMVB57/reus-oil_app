@@ -2,7 +2,7 @@ package com.reusoil.app.services.resultado;
 
 import com.reusoil.app.models.resultado.ResultadoAPI;
 import com.reusoil.app.models.resultado.ResultadoEntity;
-import com.reusoil.app.repository.ResultadoRepository;
+import com.reusoil.app.repository.resultado.ResultadoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

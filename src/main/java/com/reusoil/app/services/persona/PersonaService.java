@@ -22,4 +22,5 @@ public interface PersonaService {
 
     Optional<PersonaEntity> obtenerPersonaPorTelefono(String telefono);
 
+//    void relacionarConEmpresa(Long empresaId, Long usuarioId);
 }

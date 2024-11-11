@@ -1,4 +1,4 @@
-package com.reusoil.app.repository;
+package com.reusoil.app.repository.resultado;
 
 import com.reusoil.app.models.resultado.ResultadoAPI;
 import com.reusoil.app.models.resultado.ResultadoEntity;

@@ -73,4 +73,12 @@ public class PersonaServiceImpl implements PersonaService {
         return personaRepository.findByTelefono(telefono);
     }
 
+//    @Override
+//    public void relacionarConEmpresa(Long empresaId, Long usuarioId) {
+//        Optional<EmpresaEntity> empresa = empresaRepository.findById(empresaId);
+//        Optional<PersonaEntity> persona = personaRepository.findById(usuarioId);
+//        persona.setEmpresa(empresa);
+//        personaRepository.save(persona);
+//    }
+
 }

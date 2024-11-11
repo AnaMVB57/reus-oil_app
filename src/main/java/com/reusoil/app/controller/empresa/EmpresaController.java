@@ -1,6 +1,7 @@
 package com.reusoil.app.controller.empresa;
 
 import com.reusoil.app.models.empresa.EmpresaEntity;
+import com.reusoil.app.models.persona.PersonaEntity;
 import com.reusoil.app.services.ciudad.CiudadService;
 import com.reusoil.app.services.empresa.EmpresaService;
 import com.reusoil.app.services.persona.PersonaService;
@@ -100,19 +101,16 @@ public class EmpresaController {
     @PostMapping("/relacionar-empresa")
     public String seleccionarEmpresa(@RequestParam Long empresaId, @SessionAttribute("usuarioId") Long usuarioId, Model model) {
         try {
-            personaService.asociarEmpresaConPersona(empresaId, usuarioId);
-            return "redirect:/empresa/listado-empresas"; // Redirige a la lista de empresas
+//            personaService.relacionarConEmpresa(empresaId, usuarioId);
+            EmpresaEntity empresa = empresaService.obtenerEmpresaPorId(empresaId).get();
+            PersonaEntity persona = personaService.obtenerPersonaPorId(usuarioId).get();
+            persona.setEmpresa(empresa);
+            personaService.guardarPersona(persona);
+            return "redirect:/home"; // Redirige a la lista de empresas
         } catch (Exception e) {
             model.addAttribute("error", "Ocurrió un error al guardar la empresa.");
             return "vistas/empresa/seleccion_empresa";
         }
     }
-
-//    @PostMapping("/editar")
-//    public String guardarEdicion(@ModelAttribute("empresa") EmpresaEntity empresa) {
-//        empresaService.guardar(empresa);
-//        return "redirect:/empresas";
-//    }
-
 
 }
