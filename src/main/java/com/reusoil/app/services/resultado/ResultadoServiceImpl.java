@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,12 +19,17 @@ public class ResultadoServiceImpl implements ResultadoService{
     private final ResultadoRepository resultadoRepository;
     @Override
     public void guardar(ResultadoAPI resultado) {
-
-        ResultadoEntity resultadoGuardar = new ResultadoEntity();
-        resultadoGuardar.setResultadoTemperatura(23.5F); // Ejemplo de temperatura
-        resultadoGuardar.setNivelLlenado(75);           // Ejemplo de nivel de llenado
-        // Otros datos de sensores
-        resultadoRepository.save(resultadoGuardar);
+        try {
+            ResultadoEntity resultadoGuardar = new ResultadoEntity();
+            resultadoGuardar.setFechaMedicion(LocalDate.now());
+            resultadoGuardar.setResultadoTemperatura(resultado.getResultadoTemperatura());
+            resultadoGuardar.setNivelLlenado(resultado.getNivelLlenado());
+            resultadoGuardar.setEstado(true);
+            resultadoRepository.save(resultadoGuardar);
+        } catch (Exception e) {
+            // Maneja la excepción, por ejemplo, registrándola o lanzándola nuevamente
+            System.out.println("Error al guardar el resultado: " + e.getMessage());
+        }
     }
 
     @Override

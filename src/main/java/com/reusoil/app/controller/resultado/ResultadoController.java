@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/resultado")
 public class ResultadoController {
@@ -25,9 +25,8 @@ public class ResultadoController {
     // Endpoint para recibir los datos de los sensores y guardar el resultado
     @PostMapping("/guardar")
     public ResponseEntity<String> guardarResultado(@RequestBody ResultadoAPI resultadoAPI) {
-        resultadoAPI.setFechaMedicion(LocalDate.now());
         resultadoService.guardar(resultadoAPI);
-        resultadoSolicitado = false; // Reinicia la solicitud de resultados
+//        resultadoSolicitado = false; // Reinicia la solicitud de resultados
         return ResponseEntity.ok("Resultado recibido y almacenado.");
     }
 

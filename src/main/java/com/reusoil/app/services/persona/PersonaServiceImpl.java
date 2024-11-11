@@ -1,6 +1,8 @@
 package com.reusoil.app.services.persona;
 
+import com.reusoil.app.models.empresa.EmpresaEntity;
 import com.reusoil.app.models.persona.PersonaEntity;
+import com.reusoil.app.repository.empresa.EmpresaRepository;
 import com.reusoil.app.repository.persona.PersonaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import java.util.Optional;
 public class PersonaServiceImpl implements PersonaService {
 
     final private PersonaRepository personaRepository;
+    final private EmpresaRepository empresaRepository;
+
 
     @Override
     public List<PersonaEntity> obtenerPersonaTodos() {
@@ -68,4 +72,5 @@ public class PersonaServiceImpl implements PersonaService {
     public Optional<PersonaEntity> obtenerPersonaPorTelefono(String telefono) {
         return personaRepository.findByTelefono(telefono);
     }
+
 }

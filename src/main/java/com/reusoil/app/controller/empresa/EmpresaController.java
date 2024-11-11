@@ -3,6 +3,7 @@ package com.reusoil.app.controller.empresa;
 import com.reusoil.app.models.empresa.EmpresaEntity;
 import com.reusoil.app.services.ciudad.CiudadService;
 import com.reusoil.app.services.empresa.EmpresaService;
+import com.reusoil.app.services.persona.PersonaService;
 import com.reusoil.app.services.tipo_empresa.TipoEmpresaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class EmpresaController {
     private final CiudadService ciudadService;
     private final TipoEmpresaService tipoEmpresaService;
     private final EmpresaService empresaService;
+    private final PersonaService personaService;
 
     @PostMapping("/guardar")
     public String crearOActualizarEmpresa(@Valid @ModelAttribute("empresa") EmpresaEntity empresa,
@@ -93,6 +95,17 @@ public class EmpresaController {
         model.addAttribute("ciudades", ciudadService.obtenerCiudades());
         model.addAttribute("tiposEmpresas", tipoEmpresaService.obtenerTiposEmpresa());
         model.addAttribute("modoEdicion", false);
+    }
+
+    @PostMapping("/relacionar-empresa")
+    public String seleccionarEmpresa(@RequestParam Long empresaId, @SessionAttribute("usuarioId") Long usuarioId, Model model) {
+        try {
+            personaService.asociarEmpresaConPersona(empresaId, usuarioId);
+            return "redirect:/empresa/listado-empresas"; // Redirige a la lista de empresas
+        } catch (Exception e) {
+            model.addAttribute("error", "Ocurrió un error al guardar la empresa.");
+            return "vistas/empresa/seleccion_empresa";
+        }
     }
 
 //    @PostMapping("/editar")

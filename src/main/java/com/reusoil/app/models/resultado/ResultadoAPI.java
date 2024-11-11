@@ -10,13 +10,9 @@ import java.time.LocalDate;
 @Data
 public class ResultadoAPI {
 
-    @NotNull
     private float resultadoTemperatura;
 
-    @NotNull
     private float nivelLlenado;
 
-    @Column(name = "fecha_medicion", nullable = false)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate fechaMedicion = LocalDate.now();
 }

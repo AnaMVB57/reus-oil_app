@@ -50,4 +50,11 @@ public class EmpresaVistaController {
         }
         return "redirect:/empresa/listado-empresas";
     }
+
+    @GetMapping("/seleccionar-empresa")
+    public String mostrarSeleccionEmpresa(Model model) {
+        model.addAttribute("empresas", empresaService.obtenerEmpresasPorEstado(true));
+        return "vistas/empresa/seleccion_empresa"; // Asegúrate de que el nombre de la vista coincida con el archivo HTML
+    }
+
 }

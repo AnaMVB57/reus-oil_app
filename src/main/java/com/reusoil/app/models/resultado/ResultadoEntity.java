@@ -19,8 +19,8 @@ public class ResultadoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha_medicion", nullable = false)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "fecha_medicion")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaMedicion = LocalDate.now();
 
     @Column(name = "resultado_temperatura", nullable = false)

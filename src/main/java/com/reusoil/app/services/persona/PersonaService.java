@@ -21,4 +21,5 @@ public interface PersonaService {
     Optional<PersonaEntity> obtenerPersonaPorCorreo(String correo);
 
     Optional<PersonaEntity> obtenerPersonaPorTelefono(String telefono);
+
 }

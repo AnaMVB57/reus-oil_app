@@ -50,4 +50,5 @@ public class PersonaEntity {
                 .estado(true)
                 .build();
     }
+
 }
