@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-//@Component //Comentar si no se va a usar
+@Component //Comentar si no se va a usar
 @RequiredArgsConstructor
 public class PersonaFilter implements Filter {
 
@@ -50,9 +50,9 @@ public class PersonaFilter implements Filter {
         Long usuarioId = (Long) session.getAttribute("usuarioId");
         Optional<PersonaEntity> persona = personaService.obtenerPersonaPorUsuarioId(usuarioId);
 
-        if (persona.isPresent() && !httpRequest.getRequestURI().equals("/empresa/guardar-empresa")) {
+        if (persona.isPresent() && !httpRequest.getRequestURI().equals("/empresa/seleccionar-empresa")) {
             if (persona.get().getEmpresa() == null){
-                httpResponse.sendRedirect("/empresa/guardar-empresa");
+                httpResponse.sendRedirect("/empresa/seleccionar-empresa");
                 return;
             }
         }

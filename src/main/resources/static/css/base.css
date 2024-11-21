@@ -101,11 +101,27 @@ p {
     border-radius: 3px;
 }
 
-.footer {
-    background-color: #f8f9fa;
-    padding: 20px;
-    text-align: center;
-}
+footer {
+            background-color: #252525;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer .social-icons {
+            margin: 20px 0;
+        }
+
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        footer .social-icons a:hover {
+            color: #f17018;
+        }
 
 .container {
     background-color: #fff;

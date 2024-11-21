@@ -3,19 +3,156 @@
 <head>
     <title>Homepage</title>
     <link rel="stylesheet" th:href="@{/css/base.css}">
+    <style>
+        /* Estilo general */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Contenedor principal */
+        .banner-container {
+            width: 100%;
+            height: 80vh; /* Altura del contenedor */
+            background: url('./img/banner.png') no-repeat center center; /* Ruta del banner */
+            background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
+            display: flex; /* Flexbox para centrar contenido */
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Contenedor interno con transparencia */
+        .banner-content {
+            background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro translúcido */
+            color: white; /* Color del texto */
+            text-align: center;
+            padding: 30px 50px; /* Espaciado interno */
+            border-radius: 10px; /* Bordes redondeados */
+            max-width: 800px; /* Ancho máximo */
+        }
+
+        /* Título del banner */
+        .banner-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        /* Texto adicional del banner */
+        .banner-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Botón de Call to Action */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #28a745; /* Color verde */
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #218838; /* Efecto hover */
+        }
+
+        /* Estilo para las secciones */
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        #sobre-nosotros {
+            background-color: #f9f9f9;
+        }
+
+        #medio-ambiente {
+            background-color: #ace9c7;
+        }
+
+        #servicios {
+            background-color: #fbc2a1;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #252525;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer .social-icons {
+            margin: 20px 0;
+        }
+
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        footer .social-icons a:hover {
+            color: #f17018;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 <header th:replace="~{plantillas/base :: base-header}"></header>
 
 <main class="container my-5 text-center" th:fragment="base-content">
-    <div class="main-content">
-        <section id="inicio">
-            <h1>¡Bienvenido a Reus-Oil!</h1>
-            <p>Gestión de aceite usado de forma eficiente y ecológica.</p>
-        </section>
+    <!-- Contenedor del banner -->
+    <div class="banner-container">
+        <!-- Contenido dentro del banner
+        <div class="banner-content">
+            <h1>Bienvenido a Reus-Oil</h1>
+            <p>Gestión eficiente y ecológica de aceites usados.</p>
+            <a href="#servicios" class="cta-button">Conoce más</a>
+        </div>-->
     </div>
+
+    <!-- Sección: Sobre Nosotros -->
+    <section id="sobre-nosotros">
+        <h2>Sobre Nosotros</h2>
+        <p>En Reus-Oil, nos dedicamos a brindar soluciones innovadoras para la gestión de aceite usado, ayudando a las empresas a cumplir con estándares ambientales y optimizando procesos.</p>
+    </section>
+
+    <!-- Sección: Compromiso con el Medio Ambiente -->
+    <section id="medio-ambiente">
+        <h2>¿Qué hacemos por el medio ambiente?</h2>
+        <p>Nuestro sistema garantiza que el aceite usado sea recolectado y reciclado adecuadamente, reduciendo la contaminación y promoviendo un uso sostenible de los recursos.</p>
+    </section>
+
+    <!-- Sección: Servicios -->
+    <section id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <p>Ofrecemos un sistema inteligente de recolección de aceite usado, monitoreo en tiempo real y filtración avanzada, diseñado para ayudar a restaurantes, hoteles y negocios de comida rápida.</p>
+    </section>
 </main>
 
+<!-- Footer -->
 <footer th:replace="~{plantillas/base :: base-footer}"></footer>
 </body>
 </html>

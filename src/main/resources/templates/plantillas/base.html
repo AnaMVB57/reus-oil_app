@@ -27,7 +27,6 @@
                     <li><a th:href="@{/tipo-sensor/listado-sensores}">Tipo de Sensor</a></li>
                     <li><a th:href="@{/contenedor/listado-contenedores}" >Contenedor</a></li>
                     <li><a th:href="@{/recoleccion/listado-recolecciones}" >Recolección</a></li>
-                    <li><a th:href="@{/persona/listado-personas}" >Persona</a></li>
                 </ul>
             </li>
             <li><a th:href="@{/configuracion}">Configuración</a></li>
@@ -51,10 +50,14 @@
 
    <footer class="footer text-center py-4" th:fragment="base-footer" >
        <p>&copy; 2024 Reus-Oil. Todos los derechos reservados.</p>
-       <p>
-           <a href="#">Términos y Condiciones</a> |
-           <a href="#">Política de Privacidad</a>
-       </p>
+       <p>Contacto: contacto@reusoil.com | Tel: +573054734888</p>
+       <div class="social-icons">
+           <a href="#" class="icon"><i class="fa-brands fa-instagram"></i></a>
+           <p>
+               <a href="#">Términos y Condiciones</a> |
+               <a href="#">Política de Privacidad</a>
+           </p>
+       </div>
    </footer>
 
    </body>
